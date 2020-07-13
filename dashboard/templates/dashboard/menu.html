@@ -1,0 +1,43 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block title %}Shop{% endblock %}
+{% block main %}
+<div class="w3-sidebar w3-bar-block bg-secondary text-white" style="width:20%">
+  <form action="{% url 'search' %}" method='post'>
+    {% csrf_token %}
+    <input class="form-control" type="search" placeholder="Search" name="q">
+  </form>
+  <h6 style="margin-left: 5%; color: black;">View by Category</h6>
+  <a href="{% url 'menu' %}" class="w3-bar-item w3-button">All</a>
+  {% for category in categories %}
+  <a href="{% url 'type' category.id %}" class="w3-bar-item w3-button" value="{{ category.id }}">{{ category.Name }}</a>
+  {% endfor %}
+</div>
+
+<div style="margin-left:20%">
+<div class="conatainer p-3">
+  <div class="row" >
+{% if not items %}
+<h1 style="margin: 10%">No Tools Found</h1>
+{% endif %}
+{% for item in items %}
+  <div class="col-sm-4 ">
+      <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'item' item.id %}">{{ item.Name }}</a></h5>
+        <h5>Price: Rs. {{ item.Cost }}/-</h5>
+        <h6>{{ item.Description }}</h6>
+        <p  class="card-text">Return Policy: {{ item.Return }} <br/> Warranty: {{ item.Warranty }} <br><p>
+
+      </div>
+      </div><br>
+  </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+<style>
+
+</style>
+
+{% endblock %}

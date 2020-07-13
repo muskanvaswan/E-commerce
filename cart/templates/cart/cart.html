@@ -1,0 +1,27 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block title %}Cart{% endblock %}
+{% block main %}
+<div class="container p-5">
+  {% if not items %}
+    <h4>Your Cart is Empty</h4>
+  {% else %}
+  <h3>Order Summary:</h3>
+  <ul>
+
+  {% for i in items %}
+    <div class="card">
+      <div class="card-body">
+        <a href="{% url 'item' i.item.id %}">{{ i.item.Name }}</a> <br/> Price: Rs.{{ i.item.Cost }}/-
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+  </ul>
+
+  <h4>Total: Rs. {{total}}/- </h4>
+  <a href="{% url 'order' %}" class="btn btn-primary">Place Order</a>
+  <a href="{% url 'empty' %}" class="btn btn-danger">Empty Cart</a>
+  {% endif %}
+</div>
+{% endblock %}

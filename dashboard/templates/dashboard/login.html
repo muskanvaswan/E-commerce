@@ -1,0 +1,43 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block main %}
+
+<div class="content">
+  <div class="container p-5">
+    {% if message %}
+    <div>
+        {{ message }}
+    </div>
+    {% endif %}
+    <form action="{% url 'autherize' %}" method="post" class='form-group'>
+        {% csrf_token %}
+        <div>
+          <input name="username" type="text" class='form-control'>
+        </div>
+        <br>
+        <div>
+          <input name="password" type="password"  class='form-control'/>
+        </div>
+        <br>
+        <div>
+          <button type="submit" value="Login" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+    <br/>
+    <a href="#" >Not a User? Sign Up</a>
+</div>
+</div>
+    <style>
+    body {
+      background-image: url('https://static.vecteezy.com/system/resources/previews/000/151/933/non_2x/vector-free-home-cleaning-illustration.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+
+    }
+    </style>
+{% endblock%}

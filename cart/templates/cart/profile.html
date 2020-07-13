@@ -1,0 +1,42 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block main %}
+<div class="container p-5">
+  <h3>Username:  {{ user.username }}</h3>
+  {% if not orders %}
+    <h4>You  have not ordered anything yet. </h4>
+  {% else %}
+  <h3>Your orders:</h3>
+  <ul>
+
+  {% for i in orders %}
+    <div class="card">
+      <div class="card-body">
+        <a href="{% url 'item' i.item.id %}">{{ i.item.Name }}</a> <br/>
+        <p>Price: Rs.{{ i.item.Cost }}/- <br> Status: {{ i.status }}</p>
+
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  {% if not viewed %}
+  {% else %}
+  <h3>Recently Viewed:</h3>
+  <ul>
+  {% for i in viewed %}
+    <div class="card">
+      <div class="card-body">
+        <a href="{% url 'item' i.id %}">{{ i.Name }}</a> <br/>
+        <p>Price: Rs.{{ i.Cost }}/- </p>
+
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endblock %}
